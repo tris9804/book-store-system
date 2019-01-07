@@ -9,6 +9,9 @@ def permission_denied(request, exception, template_name='403.html'):
 
 
 def register(request):
+    if request.user.is_authenticated:
+        return redirect('root')
+        
     form = UserCreationForm(request.POST or None)
     if form.is_valid():
         user = form.save()
